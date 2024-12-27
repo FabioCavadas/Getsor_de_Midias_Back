@@ -1,0 +1,27 @@
+# Ambiente virtual (venv)
+venv/
+env/
+.env
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de logs
+*.log
+
+# Arquivos de banco de dados
+*.sqlite3
+
+# Arquivos de cache
+__pycache__/
+*.pyc
+
+# Diretórios de migração
+*/migrations/
+
+# Arquivos de configuração do Django (se necessário)
+*.sqlite3
+
+# Arquivos de backup (se você usar)
+*~
