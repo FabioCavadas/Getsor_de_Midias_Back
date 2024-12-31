@@ -35,6 +35,7 @@ class Media(BaseModel):
     name = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
     media_type = models.CharField(max_length=50, choices=MEDIA_TYPE_CHOICES, blank=True, null=True)
+    media = models.FileField(upload_to='', blank=True, null=True)
 
     class Meta:
         verbose_name = "Midia"
