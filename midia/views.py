@@ -7,32 +7,8 @@ from .models import Media
 from .serializers import MediaDetailSerializer, MediaSerializer
 
 
-class BaseViewSet(viewsets.ModelViewSet):
-    """
-    Base ViewSet to handle common logic for different model ViewSets.
-    """
-    permission_class = [AllowAny]
-
-    def get_permissions(self):
-        if self.action == 'list' or self.action == 'retrieve':
-            permission_classes = [AllowAny]
-        # else:
-        #     permission_classes = [ValidateUserAccess]
-
-        return [permission() for permission in permission_classes]
-
-    def retrieve(self, request, *args, **kwargs):
-        """
-        Handles the retrieval of a single instance, using the lookup_field.
-        """
-        instance = self.get_queryset().filter(**{self.lookup_field: self.kwargs[self.lookup_field]}).last()
-        if instance is not None:
-            serializer = self.get_serializer(instance)
-            return Response(serializer.data)
-        return Response({}, status=404)
-
-
-class MediaViewSet(BaseViewSet):
+class MediaViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = Media.objects.all()
     serializer_class = MediaDetailSerializer
     lookup_field = 'id'

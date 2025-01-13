@@ -21,7 +21,8 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include("midia.urls"), name='midia')
+    path('api/', include("midia.urls"), name='midia'),
+    path('api/user/', include('user.urls')),
 ]
 
 # Servindo arquivos de mídia durante o desenvolvimento
