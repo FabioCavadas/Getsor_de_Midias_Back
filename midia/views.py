@@ -13,10 +13,13 @@ class MediaViewSet(viewsets.ModelViewSet):
     serializer_class = MediaDetailSerializer
     lookup_field = 'id'
 
-    def get_queryset(self):
-        if self.action == 'list':
-            return Media.objects.filter(is_active=True)
-        return super().get_queryset()
+
+def get_queryset(self):
+    if self.action == 'list':
+        if not self.request.user.is_authenticated:
+            return Media.objects.filter(is_active=True, media_type="image")
+        return Media.objects.filter(is_active=True)
+    return super().get_queryset()
 
     def get_serializer_class(self):
         if self.action in "list":
